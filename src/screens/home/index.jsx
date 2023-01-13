@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { View, Button } from "react-native";
 
-function HomeScreen({navigation}) {
+import Layout from '../../components/layout';
+
+function HomeScreen(props) {
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
-    </View>
+    <Layout {...props}>
+      
+    </Layout>
   );
 }
 

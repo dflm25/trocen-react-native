@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   },    
   scrollView: {
     padding: 0,
+    paddingTop: 0,
   },
   headerImage: {
     padding: 20,

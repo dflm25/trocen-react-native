@@ -14,7 +14,8 @@ export default function DrawerStack() {
   return (
     <Drawer.Navigator 
       drawerContent={props => <CustomDrawer {...props} />}
-      screenOptions={{ 
+      screenOptions={{
+        headerShown: false,
         drawerActiveBackgroundColor: styles.colors.primary,
         drawerActiveTintColor: styles.colors.white,
         drawerLabelStyle: { marginLeft: -22 } 
