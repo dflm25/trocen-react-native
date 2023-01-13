@@ -1,23 +1,31 @@
-import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, Text} from 'react-native';
 import {TextInput as Input} from 'react-native-paper';
+import {Controller} from 'react-hook-form';
 
 import styles from './styles';
 
-export default function TextInput({errorText, description, ...props}) {
+export default function TextInput({control, name, error, ...props}) {
   return (
     <View style={styles.container}>
-      <Input
-        style={styles.input}
-        selectionColor={styles.colors.primary}
-        underlineColor="transparent"
-        mode="outlined"
-        {...props}
+      <Controller
+        control={control}
+        name={name}
+        render={({field: {onChange, value}}) => (
+          <Input
+            style={styles.input}
+            selectionColor={styles.colors.primary}
+            underlineColor="transparent"
+            mode="outlined"
+            onChangeText={onChange}
+            value={value}
+            {...props}
+          />
+        )}
       />
-      {description && !errorText ? (
-        <Text style={styles.description}>{description}</Text>
-      ) : null}
-      {errorText ? <Text style={styles.error}>{errorText}</Text> : null}
+
+      {error && error[name] && (
+        <Text style={styles.error}>{error[name].message}</Text>
+      )}
     </View>
   );
 }

@@ -1,45 +1,33 @@
-import * as React from 'react';
+import React, {useContext} from 'react';
+import {View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Provider} from 'react-native-paper';
+import {Provider, ActivityIndicator, MD2Colors} from 'react-native-paper';
 
 // screens
-import StartScreen from '../screens/start';
-import LoginScreen from '../screens/login';
-import RegisterScreen from '../screens/register';
-import ForgotPasswordScreen from '../screens/forgotPassword';
+import AuthStack from './authStack';
+
+// Context
+import {AuthContext} from '../context/authContext';
 
 // theme
+import styles from './styles';
 import theme from '../../src/assets/theme';
 
-const Stack = createNativeStackNavigator();
-
 export default function App() {
+  const {isLoading, token} = useContext(AuthContext);
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={MD2Colors.purple800} />
+      </View>
+    );
+  }
+
   return (
     <Provider theme={theme}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="StartScreen"
-            component={StartScreen}
-            options={{headerShown: false}}
-          />
-          <Stack.Screen
-            name="LoginScreen"
-            component={LoginScreen}
-            options={{title: 'Ingresar'}}
-          />
-          <Stack.Screen
-            name="RegisterScreen"
-            component={RegisterScreen}
-            options={{title: 'Registro'}}
-          />
-          <Stack.Screen
-            name="ForgotPasswordScreen"
-            component={ForgotPasswordScreen}
-            options={{title: 'Recuperar contraseña'}}
-          />
-        </Stack.Navigator>
+        {!token ? <AuthStack /> : <AuthStack />}
       </NavigationContainer>
     </Provider>
   );
