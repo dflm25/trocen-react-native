@@ -1,35 +1,36 @@
 import React, {createContext, useEffect, useState} from 'react';
 
-import {setData, removeData, getData} from '../utilities/storage';
+import {storeData, removeData, getData} from '../utilities/storage';
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [token, setToken] = useState(null);
+  const [userToken, setUserToken] = useState(null);
 
   const login = async data => {
     setIsLoading(true);
-    setToken('token', '12321321321312');
-    await setData('token', '12321321321312');
+    await storeData('token', '12321321321312');
+    setUserToken('token', '12321321321312');
     setIsLoading(false);
   };
 
   const logOut = () => {
     setIsLoading(true);
-    setToken(null);
+    setUserToken(null);
     removeData('token');
-    removeData('user');
     setIsLoading(false);
   };
 
   const isLoggedIn = async () => {
     try {
       setIsLoading(true);
-      let userToken = await getData('token');
-      setToken(userToken);
+      setUserToken(await getData('token'));
+      console.log(await getData('token'));
       setIsLoading(false);
-    } catch (error) {}
+    } catch (error) {
+      console.log('isLoggedIn', error);
+    }
   };
 
   useEffect(() => {
@@ -37,7 +38,8 @@ const AuthProvider = ({children}) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{isLoading, token, login, logOut, isLoggedIn}}>
+    <AuthContext.Provider
+      value={{isLoading, userToken, login, logOut, isLoggedIn}}>
       {children}
     </AuthContext.Provider>
   );

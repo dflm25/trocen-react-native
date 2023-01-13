@@ -5,7 +5,7 @@ export const storeData = async (item, value) => {
     const jsonValue = typeof value === 'string' ? value : JSON.stringify(value);
     await AsyncStorage.setItem(item, jsonValue);
   } catch (e) {
-    // saving error
+    console.warn('Set error: ', e);
   }
 };
 
@@ -15,6 +15,7 @@ export const getData = async item => {
     return jsonValue != null ? jsonValue : null;
   } catch (e) {
     // error reading value
+    console.warn('Get error: ', e);
   }
 };
 
@@ -23,5 +24,6 @@ export const removeData = async item => {
     await AsyncStorage.removeItem(item);
   } catch (e) {
     // error reading value
+    console.warn('Remove error: ', e);
   }
 };

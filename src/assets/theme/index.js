@@ -8,6 +8,8 @@ export const theme = {
     primary: '#560CCE',
     secondary: '#414757',
     error: '#f13a59',
+    white: '#fff',
+    gray: '#ccc'
   },
   paragraph: {
     fontSize: 15,

@@ -11,8 +11,8 @@ const schema = yup.object().shape({
   password: yup
     .string()
     .required('Password es requerido')
-    .min(7, 'Mínimo 7 caracteres')
-    .matches(regex, 'un Numero, una mayuscula y un caracter especial'),
+    .min(7, 'Mínimo 7 caracteres'),
+  // .matches(regex, 'un Numero, una mayuscula y un caracter especial'),
 });
 
 export default schema;

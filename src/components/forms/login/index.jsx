@@ -15,6 +15,7 @@ function LoginForm({navigation, onSubmit}) {
     control,
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: { email: 'dflm25@gmail.com', password: '12345678' }
   });
 
   return (
