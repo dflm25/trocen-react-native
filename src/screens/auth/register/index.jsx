@@ -1,7 +1,7 @@
 // components
-import BackgroundContainer from '../../components/containers/background';
-import RegisterForm from '../../components/forms/register';
-import Logo from '../../components/logo';
+import BackgroundContainer from '../../../components/containers/background';
+import RegisterForm from '../../../components/forms/register';
+import Logo from '../../../components/logo';
 
 export default function RegisterScreen(props) {
   const handleSubmit = data => {
