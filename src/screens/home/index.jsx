@@ -12,6 +12,10 @@ function HomeScreen(props) {
   return (
     <Layout {...props}>
       <Text style={styles.title} variant="titleMedium">
+        Resumen
+      </Text>
+      <View style={styles.cardItem}></View>
+      <Text style={styles.title} variant="titleMedium">
         Pedidos
       </Text>
       <View style={styles.cardItem}>
