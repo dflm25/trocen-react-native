@@ -1,12 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit'
+import {createStore, applyMiddleware} from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-import authSlice from './features/auth/authSlice'
-import globalSlice from './features/global/globalSlice'
+import rootSagas from './saga';
+import RootReducer from './reducer';
 
-export const store = configureStore({
-    reducer: {
-      loading: globalSlice,
-      auth: authSlice,
-    },
-});
-  
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(RootReducer, applyMiddleware(sagaMiddleware));
+
+sagaMiddleware.run(rootSagas);
+export default store;

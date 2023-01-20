@@ -3,7 +3,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 // Screens
 import HomeScreen from '../../screens/home';
-import CategoriesScreen from '../../screens/categories';
+import BrandsScreen from '../../screens/brand';
 import CustomDrawer from '../../components/drawer';
 
 // styles
@@ -30,8 +30,8 @@ export default function DrawerStack() {
         }}
       />
       <Drawer.Screen
-        name="Categorias"
-        component={CategoriesScreen}
+        name="Brands"
+        component={BrandsScreen}
         options={{
           drawerIcon: ({color}) => (
             <Icon name="th-list" size={22} color={color} />

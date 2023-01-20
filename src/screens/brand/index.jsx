@@ -1,17 +1,31 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, FlatList} from 'react-native';
 import {Text, Card, Searchbar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+// Services
+import {getAllBrands} from '../../services/brand';
+
 import Layout from '../../components/layout';
 import styles from './styles';
 
+const getPaginate = async (setBrands, page) => {
+  const response = getAllBrands({page});
+};
+
 function CategoriesScreen(props) {
+  const [page, setPage] = useState(1);
+  const [brands, setBrands] = useState([]);
+
+  useEffect(() => {
+    getPaginate(setBrands, page);
+  }, [page]);
+
   return (
     <Layout {...props}>
       <View style={styles.adminHeader}>
         <Text style={styles.title} variant="titleMedium">
-          Categorias
+          Marcas
         </Text>
         <Text style={styles.title} variant="titleMedium">
           <Icon name="plus" size={18} style={styles.icon} />
@@ -19,17 +33,17 @@ function CategoriesScreen(props) {
       </View>
       <View style={styles.searchContainer}>
         <Searchbar
-          placeholder="Buscar categoria"
+          placeholder="Buscar una marca"
           onChangeText={() => {}}
           value={[]}
         />
       </View>
       <FlatList
-        data={[{}, {}, {}, {}]}
+        data={brands}
         renderItem={({item}) => (
           <View style={styles.cardItem}>
             <Card.Title
-              title="Vans classic"
+              title={item.name}
               right={props => (
                 <Icon name="ellipsis-v" size={20} style={styles.icon} />
               )}

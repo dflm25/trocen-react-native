@@ -1,6 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react';
 
-import {storeData, removeData, getData} from '../utilities/storage';
+import {clearStorage, getStorage} from '../utilities/storage';
 
 export const AuthContext = createContext();
 
@@ -10,23 +10,21 @@ const AuthProvider = ({children}) => {
 
   const login = async data => {
     setIsLoading(true);
-    await storeData('token', '12321321321312');
-    setUserToken('token', '12321321321312');
+    setUserToken('token', data.token);
     setIsLoading(false);
   };
 
   const logOut = () => {
     setIsLoading(true);
     setUserToken(null);
-    removeData('token');
+    clearStorage('token');
     setIsLoading(false);
   };
 
   const isLoggedIn = async () => {
     try {
       setIsLoading(true);
-      setUserToken(await getData('token'));
-      console.log(await getData('token'));
+      setUserToken(await getStorage('token'));
       setIsLoading(false);
     } catch (error) {
       console.log('isLoggedIn', error);

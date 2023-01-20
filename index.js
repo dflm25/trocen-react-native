@@ -3,12 +3,12 @@
  */
 import React from 'react';
 import {AppRegistry} from 'react-native';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 
 // Routes
 import App from './src/routes';
 import AuthProvider from './src/context/authContext';
-import { store } from './src/redux/store';
+import store from './src/redux/store';
 
 import {name as appName} from './app.json';
 

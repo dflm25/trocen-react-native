@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
   ...theme,
   container: {
     width: width - 40,
-    marginVertical: 12,
+    marginVertical: 4,
   },
   input: {
     backgroundColor: theme.colors.surface,

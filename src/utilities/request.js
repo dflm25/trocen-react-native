@@ -1,4 +1,4 @@
-import { getStorage } from './storage';
+import {getStorage} from './storage';
 import config from '../config';
 
 function parseJSON(response) {
