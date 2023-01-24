@@ -6,7 +6,7 @@ import 'react-native-gesture-handler';
 
 // screens
 import AuthStack from './authStack';
-import DrawerStack from './drawerStack';
+import AppStack from './appStack';
 
 // Context
 import {AuthContext} from '../context/authContext';
@@ -29,7 +29,7 @@ export default function App() {
   return (
     <Provider theme={theme}>
       <NavigationContainer>
-        {!userToken ? <AuthStack /> : <DrawerStack />}
+        {!userToken ? <AuthStack /> : <AppStack />}
       </NavigationContainer>
     </Provider>
   );

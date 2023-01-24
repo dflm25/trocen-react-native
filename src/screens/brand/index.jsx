@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, TouchableOpacity} from 'react-native';
 import {Text, Card, Searchbar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -17,10 +17,6 @@ function CategoriesScreen(props) {
   const [page, setPage] = useState(1);
   const [brands, setBrands] = useState([]);
 
-  useEffect(() => {
-    getPaginate(setBrands, page);
-  }, [page]);
-
   return (
     <Layout {...props}>
       <View style={styles.adminHeader}>
@@ -28,7 +24,10 @@ function CategoriesScreen(props) {
           Marcas
         </Text>
         <Text style={styles.title} variant="titleMedium">
-          <Icon name="plus" size={18} style={styles.icon} />
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate('BrandForm')}>
+            <Icon name="plus" size={18} style={styles.icon} />
+          </TouchableOpacity>
         </Text>
       </View>
       <View style={styles.searchContainer}>
