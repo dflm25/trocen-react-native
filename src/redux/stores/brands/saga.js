@@ -7,7 +7,7 @@ import {setResponse} from '../../stores/app/actions';
 import request from '../../../utilities/request';
 
 // Constants
-import {GET_PAGINATION, CREATE_BRAND} from './constants';
+import {GET_PAGINATION, CREATE_BRAND, UPDATE_BRAND, REMOVE_BRAND} from './constants';
 
 function* getPagination(action) {  
   const {
@@ -41,6 +41,42 @@ function* createBrand(action) {
   }
 }
 
+function* updateBrand(action) {
+  const {
+    cb,
+    payload: { id, name },
+  } = action;
+
+  const url = `api/brands/${id}`
+  const requestOptions = {method: 'PUT', body: JSON.stringify({ name })};
+
+  try {
+    const response = yield call(request, url, requestOptions);
+    yield put(setResponse('success', false, false, response, cb));
+  } catch (error) {
+    yield put(setResponse('error', false, false, error, cb));
+  }
+}
+
+function* removeBrand(action) {
+  const {
+    cb,
+    payload: { id },
+  } = action;
+
+  const url = `api/brands/${id}`
+  const requestOptions = {method: 'DELETE'};
+
+  try {
+    const response = yield call(request, url, requestOptions);
+    yield put(setResponse('success', false, false, response, cb));
+  } catch (error) {
+    console.log('error', error)
+    yield put(setResponse('error', false, false, error, cb));
+  }
+}
+
+
 /**
  * Declare all component sagas
  */
@@ -48,6 +84,8 @@ function* createBrand(action) {
 export default function* rootSaga() {
   yield all([
     takeLatest(CREATE_BRAND, createBrand),
-    takeLatest(GET_PAGINATION, getPagination)
+    takeLatest(GET_PAGINATION, getPagination),
+    takeLatest(UPDATE_BRAND, updateBrand),
+    takeLatest(REMOVE_BRAND, removeBrand),
   ]);
 }

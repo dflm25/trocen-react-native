@@ -5,7 +5,7 @@ import SimpleContainer from '../../../components/containers/simple';
 import BrandForm from '../../../components/forms/brands';
 import {AuthContext} from '../../../context/authContext';
 
-function CreateBrandScreen({brandActions: {createBrand}, ...props}) {
+function CreateBrandScreen({brandActions: {createBrand, updateBrand}, ...props}) {
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState(false);
   const {userInfo} = useContext(AuthContext);
@@ -13,15 +13,25 @@ function CreateBrandScreen({brandActions: {createBrand}, ...props}) {
   const handleSubmit = formData => {
     const userParsed = JSON.parse(userInfo);
 
-    createBrand(
-      {store_id: userParsed[0].store_id, ...formData},
-      (type, response) => {
-        if (type === 'success') {
-          setVisible(true);
-          setMessage('Marca creada correctamente!');
-        }
-      },
-    );
+    if (props?.route?.params !== undefined) {
+      updateBrand(formData, (type, response) => {
+          if (type === 'success') {
+            setVisible(true);
+            setMessage('Marca actualizada correctamente!');
+          }
+        },
+      );
+    } else {
+      createBrand(
+        {store_id: userParsed[0].store_id, ...formData},
+        (type, response) => {
+          if (type === 'success') {
+            setVisible(true);
+            setMessage('Marca creada correctamente!');
+          }
+        },
+      );
+    }
   };
 
   const handleCloseSnack = () => {
@@ -35,7 +45,7 @@ function CreateBrandScreen({brandActions: {createBrand}, ...props}) {
       handleCloseSnack={handleCloseSnack}
       message={message}
       setMessage={setMessage}>
-      <BrandForm onSubmit={handleSubmit} />
+      <BrandForm onSubmit={handleSubmit} defaultValues={props.route.params} />
     </SimpleContainer>
   );
 }

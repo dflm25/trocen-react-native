@@ -58,7 +58,6 @@ export default async function request(url, receivedOptions) {
   }
 
   // Execute request
-  console.log('options', options)
   return fetch(baseURL.concat(url), options)
     .catch(handleError)
     .then(checkStatus)

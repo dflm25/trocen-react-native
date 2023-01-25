@@ -1,11 +1,15 @@
 import React from 'react';
 import {View, TouchableOpacity, SafeAreaView} from 'react-native';
+import { Button, Dialog, Portal, Text } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 // styles
 import styles from './styles';
 
-export default function Layout({children, navigation}) {
+export default function Layout({children, navigation, actions, visibleDialog, message}) {
+
+  const hideDialog = () => actions.setVisibleDialog(false);
+
   return (
     <SafeAreaView>
       <View style={styles.headerContainer}>
@@ -21,6 +25,16 @@ export default function Layout({children, navigation}) {
         </TouchableOpacity>
       </View>
       <View style={styles.containerWhite}>{children}</View>
+
+      <Dialog visible={visibleDialog} onDismiss={hideDialog}>
+        <Dialog.Content>
+          <Text variant="bodyMedium">{message}</Text>
+        </Dialog.Content>
+        <Dialog.Actions>
+          <Button onPress={hideDialog}>Cancelar</Button>
+          <Button onPress={() => actions.handleDelete()}>Aceptar</Button>
+        </Dialog.Actions>
+      </Dialog>
     </SafeAreaView>
   );
 }

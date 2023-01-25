@@ -15,11 +15,13 @@ import FlatListHeader from '../../components/flatListHeader';
 import {AuthContext} from '../../context/authContext';
 import styles from './styles';
 
-function BrandScreen({brandActions: {getPagination}, ...props}) {
+function BrandScreen({brandActions: {getPagination, removeBrand}, ...props}) {
   const isFocused = useIsFocused();
   const {userInfo} = useContext(AuthContext);
   const [page, setPage] = useState(1);
   const [brands, setBrands] = useState([]);
+  const [visibleDialog, setVisibleDialog] = useState(false);
+  const [currentId, setCurrentId] = useState(false);
 
   useEffect(() => {
     const userParsed = JSON.parse(userInfo);
@@ -31,10 +33,28 @@ function BrandScreen({brandActions: {getPagination}, ...props}) {
         }
       },
     );
-  }, [isFocused]);
+  }, [isFocused, currentId]);
+
+  const handleDelete = () => {
+    removeBrand({ id: currentId }, (type, response) => {
+      if (type === 'success') {
+        setVisibleDialog(false);
+        setCurrentId(false);
+      }
+    })
+  }
+
+  const handleDeleteSelected = (id) => {
+    setVisibleDialog(true);
+    setCurrentId(id);
+  }
 
   return (
-    <Layout {...props}>
+    <Layout 
+      {...props} visibleDialog={visibleDialog}
+      message="Estas seguro de eliminar la marca?"
+      actions={{ handleDelete, setVisibleDialog }}
+    >
       <FlatListHeader {...props} />
       <FlatList
         data={brands}
@@ -42,7 +62,7 @@ function BrandScreen({brandActions: {getPagination}, ...props}) {
           <View style={styles.cardItem}>
             <Card.Title
               title={item.name}
-              right={props => (
+              right={menuProps => (
                 <Menu>
                   <MenuTrigger>
                     <Icon name="ellipsis-v" size={20} style={styles.icon} />
@@ -50,12 +70,12 @@ function BrandScreen({brandActions: {getPagination}, ...props}) {
                   <MenuOptions>
                     <MenuOption
                       customStyles={styles.itemMenu}
-                      onSelect={() => alert(`Save`)}
+                      onSelect={() => props.navigation.navigate('BrandForm', item)}
                       text="Editar"
                     />
                     <MenuOption
                       customStyles={styles.itemMenu}
-                      onSelect={() => alert(`Not called`)}
+                      onSelect={() => handleDeleteSelected(item.id)}
                       text="Eliminar"
                     />
                   </MenuOptions>
