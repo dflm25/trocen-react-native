@@ -8,13 +8,6 @@ const styles = StyleSheet.create({
   searchContainer: {
     marginVertical: 10,
   },
-  cardItem: {
-    marginBottom: 8,
-    backgroundColor: theme.colors.white,
-    paddingVertical: 5,
-    paddingHorizontal: 2,
-    borderRadius: 10,
-  },
   title: {
     marginVertical: 10,
   },
@@ -28,12 +21,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'blue',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  itemMenu: {
-    optionWrapper: {
-      paddingVertical: 8,
-      paddingHorizontal: 10,
-    },
   },
 });
 

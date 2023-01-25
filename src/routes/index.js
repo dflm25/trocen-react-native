@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider, ActivityIndicator, MD2Colors} from 'react-native-paper';
+import {MenuProvider} from 'react-native-popup-menu';
 import 'react-native-gesture-handler';
 
 // screens
@@ -29,7 +30,13 @@ export default function App() {
   return (
     <Provider theme={theme}>
       <NavigationContainer>
-        {!userToken ? <AuthStack /> : <AppStack />}
+        {!userToken ? (
+          <AuthStack />
+        ) : (
+          <MenuProvider>
+            <AppStack />
+          </MenuProvider>
+        )}
       </NavigationContainer>
     </Provider>
   );

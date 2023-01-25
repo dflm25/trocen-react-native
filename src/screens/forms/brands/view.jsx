@@ -1,32 +1,42 @@
-import React, {useContext} from 'react';
-import {SafeAreaView} from 'react-native';
+import React, {useContext, useState} from 'react';
 
 // Components
+import SimpleContainer from '../../../components/containers/simple';
 import BrandForm from '../../../components/forms/brands';
 import {AuthContext} from '../../../context/authContext';
 
-// styles
-import styles from './styles';
-
-function CreateBrandScreen({ brandActions : { createBrand } }) {
+function CreateBrandScreen({brandActions: {createBrand}, ...props}) {
+  const [visible, setVisible] = useState(false);
+  const [message, setMessage] = useState(false);
   const {userInfo} = useContext(AuthContext);
 
-  const handleSubmit = (formData) => {
+  const handleSubmit = formData => {
     const userParsed = JSON.parse(userInfo);
-    
-    createBrand({ storage_id: userParsed[0].store_id, ...formData }, (type, response) => {
+
+    createBrand(
+      {store_id: userParsed[0].store_id, ...formData},
+      (type, response) => {
         if (type === 'success') {
-            setLoading(false);
-            console.log('Done', response)
+          setVisible(true);
+          setMessage('Marca creada correctamente!');
         }
-        console.log('error', response)
-    })
-  }
+      },
+    );
+  };
+
+  const handleCloseSnack = () => {
+    setVisible(false);
+    props.navigation.navigate('Brands');
+  };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SimpleContainer
+      visible={visible}
+      handleCloseSnack={handleCloseSnack}
+      message={message}
+      setMessage={setMessage}>
       <BrandForm onSubmit={handleSubmit} />
-    </SafeAreaView>
+    </SimpleContainer>
   );
 }
 

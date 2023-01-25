@@ -7,7 +7,7 @@ import styles from './styles';
 
 export default function Layout({children, navigation}) {
   return (
-    <SafeAreaView style={{justifyContent: 'center'}}>
+    <SafeAreaView>
       <View style={styles.headerContainer}>
         <TouchableOpacity
           style={styles.button}

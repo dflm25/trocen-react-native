@@ -1,47 +1,41 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {View, FlatList, TouchableOpacity} from 'react-native';
-import {Text, Card, Searchbar} from 'react-native-paper';
+import {View, FlatList, SafeAreaView} from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
+import {Card} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {
+  Menu,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-popup-menu';
 
 import Layout from '../../components/layout';
+import FlatListHeader from '../../components/flatListHeader';
 import {AuthContext} from '../../context/authContext';
 import styles from './styles';
 
-function BrandScreen({ brandActions: { getPagination }, ...props}) {
+function BrandScreen({brandActions: {getPagination}, ...props}) {
+  const isFocused = useIsFocused();
   const {userInfo} = useContext(AuthContext);
   const [page, setPage] = useState(1);
   const [brands, setBrands] = useState([]);
 
   useEffect(() => {
     const userParsed = JSON.parse(userInfo);
-    getPagination({ page, storage_id: userParsed[0].store_id }, (type, response) => {
-      if (type === 'success') {
-        setLoading(false);
-        setBrands(response);
-      }
-    });
-  }, [])
+    getPagination(
+      {page, store_id: userParsed[0].store_id},
+      (type, response) => {
+        if (type === 'success') {
+          setBrands(response.data);
+        }
+      },
+    );
+  }, [isFocused]);
 
   return (
     <Layout {...props}>
-      <View style={styles.adminHeader}>
-        <Text style={styles.title} variant="titleMedium">
-          Marcas
-        </Text>
-        <Text style={styles.title} variant="titleMedium">
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate('BrandForm')}>
-            <Icon name="plus" size={18} style={styles.icon} />
-          </TouchableOpacity>
-        </Text>
-      </View>
-      <View style={styles.searchContainer}>
-        <Searchbar
-          placeholder="Buscar una marca"
-          onChangeText={() => {}}
-          value={[]}
-        />
-      </View>
+      <FlatListHeader {...props} />
       <FlatList
         data={brands}
         renderItem={({item}) => (
@@ -49,7 +43,23 @@ function BrandScreen({ brandActions: { getPagination }, ...props}) {
             <Card.Title
               title={item.name}
               right={props => (
-                <Icon name="ellipsis-v" size={20} style={styles.icon} />
+                <Menu>
+                  <MenuTrigger>
+                    <Icon name="ellipsis-v" size={20} style={styles.icon} />
+                  </MenuTrigger>
+                  <MenuOptions>
+                    <MenuOption
+                      customStyles={styles.itemMenu}
+                      onSelect={() => alert(`Save`)}
+                      text="Editar"
+                    />
+                    <MenuOption
+                      customStyles={styles.itemMenu}
+                      onSelect={() => alert(`Not called`)}
+                      text="Eliminar"
+                    />
+                  </MenuOptions>
+                </Menu>
               )}
             />
           </View>
