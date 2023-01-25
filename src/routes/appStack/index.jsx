@@ -10,7 +10,7 @@ function appStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name="Dashboard"
         component={Home}
         options={{headerShown: false}}
       />

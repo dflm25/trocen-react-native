@@ -16,7 +16,7 @@ export default function Layout({children, navigation}) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={navigation.navigate('Home')}>
+          onPress={() => navigation.navigate('Home')}>
           <Icon name="notification" size={22} color={styles.colors.white} />
         </TouchableOpacity>
       </View>

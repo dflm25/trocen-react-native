@@ -20,8 +20,8 @@ import HeaderImage from '../../assets/images/header.jpg';
 import avatarUser from '../../assets/images/avatar.png';
 
 export default function CustomDrawer(props) {
-  const {logOut, userInfo} = useContext(AuthContext);
-  console.log('userInfo', userInfo);
+  const {logOut} = useContext(AuthContext);
+
   return (
     <SafeAreaView style={styles.container}>
       <DrawerContentScrollView

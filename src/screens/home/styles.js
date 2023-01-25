@@ -2,6 +2,7 @@ import {StyleSheet} from 'react-native';
 import {theme} from '../../assets/theme';
 
 const styles = StyleSheet.create({
+  ...theme,
   cardItem: {
     marginBottom: 8,
     backgroundColor: theme.colors.white,

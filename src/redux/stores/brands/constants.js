@@ -1,0 +1,3 @@
+/**  */
+export const GET_PAGINATION = 'BRANDS/GET_PAGINATION';
+export const CREATE_BRAND = 'BRANDS/CREATE_BRAND';
