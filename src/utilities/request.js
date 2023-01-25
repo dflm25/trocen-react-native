@@ -45,7 +45,8 @@ export default async function request(url, receivedOptions) {
     };
 
     if (typeof token !== 'undefined' && token) {
-      headers.authorization = `Bearer ${token}`;
+      token = JSON.parse(token);
+      headers.authorization = `Bearer ${token.token}`;
     }
 
     // Add Headers for request
@@ -57,6 +58,7 @@ export default async function request(url, receivedOptions) {
   }
 
   // Execute request
+  console.log('options', options)
   return fetch(baseURL.concat(url), options)
     .catch(handleError)
     .then(checkStatus)

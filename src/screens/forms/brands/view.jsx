@@ -17,7 +17,9 @@ function CreateBrandScreen({ brandActions : { createBrand } }) {
     createBrand({ storage_id: userParsed[0].store_id, ...formData }, (type, response) => {
         if (type === 'success') {
             setLoading(false);
+            console.log('Done', response)
         }
+        console.log('error', response)
     })
   }
 
