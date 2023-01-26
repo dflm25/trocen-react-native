@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {View, FlatList, SafeAreaView} from 'react-native';
+import {View, FlatList} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 import {Card} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -56,9 +56,9 @@ function BrandScreen({brandActions: {getPagination, removeBrand}, ...props}) {
       message="Estas seguro de eliminar la marca?"
       actions={{handleDelete, setVisibleDialog}}>
       <FlatListHeader
-        title="Marcas"
-        goTo="BrandForm"
-        placeholder="Buscar marca"
+        title="Productos"
+        goTo="ProductForm"
+        placeholder="Buscar producto"
         {...props}
       />
       <FlatList
@@ -76,7 +76,7 @@ function BrandScreen({brandActions: {getPagination, removeBrand}, ...props}) {
                     <MenuOption
                       customStyles={styles.itemMenu}
                       onSelect={() =>
-                        props.navigation.navigate('BrandForm', item)
+                        props.navigation.navigate('ProductForm', item)
                       }
                       text="Editar"
                     />

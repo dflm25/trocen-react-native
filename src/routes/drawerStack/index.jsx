@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 // Screens
 import HomeScreen from '../../screens/home';
 import BrandsScreen from '../../screens/brand';
+import ProductsScreen from '../../screens/products';
 import CustomDrawer from '../../components/drawer';
 
 // styles
@@ -40,7 +41,7 @@ export default function DrawerStack() {
       />
       <Drawer.Screen
         name="Productos"
-        component={HomeScreen}
+        component={ProductsScreen}
         options={{
           drawerIcon: ({color}) => (
             <Icon name="barcode" size={22} color={color} />
