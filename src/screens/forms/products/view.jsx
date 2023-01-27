@@ -46,8 +46,12 @@ function CreateBrandScreen({
       visible={visible}
       handleCloseSnack={handleCloseSnack}
       message={message}
-      setMessage={setMessage}>
-      <ProductForm onSubmit={handleSubmit} defaultValues={props.route.params} />
+      setMessage={setMessage}
+    >
+      <ProductForm
+        onSubmit={handleSubmit} 
+        defaultValues={props.route.params} 
+      />
     </SimpleContainer>
   );
 }

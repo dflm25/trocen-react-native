@@ -5,6 +5,9 @@ const {width} = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   ...theme,
+  container: {
+    flex: 1,
+  },
   headerContainer: {
     padding: 20,
     flexDirection: 'row',

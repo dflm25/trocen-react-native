@@ -34,6 +34,7 @@ export default function DrawerStack() {
         name="Brands"
         component={BrandsScreen}
         options={{
+          title: 'Marcas',
           drawerIcon: ({color}) => (
             <Icon name="th-list" size={22} color={color} />
           ),

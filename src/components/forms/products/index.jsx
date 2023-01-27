@@ -5,6 +5,7 @@ import DropDownPicker from 'react-native-dropdown-picker';
 
 import Button from '../../button';
 import TextInput from '../../textInput';
+import TextArea from '../../textArea'
 import schema from './schema';
 import styles from './styles';
 
@@ -75,6 +76,12 @@ function ProductForm({onSubmit, defaultValues}) {
         label="Stock maximo"
         name="stock_max"
         returnKeyType="next"
+        error={errors}
+        control={control}
+      />
+
+      <TextArea 
+        name="description"
         error={errors}
         control={control}
       />

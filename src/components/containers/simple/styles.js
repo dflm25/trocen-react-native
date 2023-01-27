@@ -12,10 +12,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     width: '100%',
-    maxWidth: 340,
     alignSelf: 'center',
     alignItems: 'center',
   },
+  scrollView: {
+    flex: 1
+  }
 });
 
 export default styles;

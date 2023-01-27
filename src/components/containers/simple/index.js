@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, KeyboardAvoidingView} from 'react-native';
+import {SafeAreaView, KeyboardAvoidingView, ScrollView} from 'react-native';
 import {Snackbar} from 'react-native-paper';
 
 // Styles
@@ -13,9 +13,10 @@ export default function Background({
 }) {
   return (
     <SafeAreaView style={styles.background}>
-      <KeyboardAvoidingView style={styles.container} behavior="padding">
-        {children}
-      </KeyboardAvoidingView>
+      <ScrollView style={styles.scrollView}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
+          {children}
+        </KeyboardAvoidingView>
       <Snackbar
         duration={3000}
         visible={visible}
@@ -26,6 +27,7 @@ export default function Background({
         }}>
         {message}
       </Snackbar>
+      </ScrollView>
     </SafeAreaView>
   );
 }

@@ -812,6 +812,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@freakycoder/react-native-text-area@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@freakycoder/react-native-text-area/-/react-native-text-area-0.1.5.tgz#99e1b367d4a386862f2a6f2d9de5debed6d4f9a6"
+  integrity sha512-poenglFNrlg2wLeGrqKFwZaJDBgnnKMGAdse5uLpcwmCKeQ6tnAf1pgW4jLNFpCpUxY8CGOptBmKN8QmB72gpQ==
+
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.3.0.tgz#8368869dcb735be2e7f5cb7647de78e167a251fb"

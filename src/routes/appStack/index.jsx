@@ -15,8 +15,8 @@ function appStack() {
         component={Home}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="BrandForm" component={BrandCreateScreen} />
-      <Stack.Screen name="ProductForm" component={ProductCreateScreen} />
+      <Stack.Screen options={{ title: 'Crear una marca' }} name="BrandForm" component={BrandCreateScreen} />
+      <Stack.Screen options={{ title: 'Crear una producto' }} name="ProductForm" component={ProductCreateScreen} />
     </Stack.Navigator>
   );
 }
